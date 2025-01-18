@@ -1,0 +1,65 @@
+{% set first_banner_link = banners[0].link %}
+<div id="carousel-banner-{{ module }}" class="carousel slide{% if effect == 'fade' %} carousel-fade{% endif %}" data-bs-ride="carousel">
+  {% if indicators and banners|batch(items)|length > 1 %}
+    <div class="carousel-indicators">
+      {% set banner_row = 0 %}
+      {% for banner in banners|batch(items) %}
+        <button type="button" data-bs-target="#carousel-banner-{{ module }}" data-bs-slide-to="{{ banner_row }}"{% if banner_row == 0 %} class="active"{% endif %}></button>
+        {% set banner_row = banner_row + 1 %}
+      {% endfor %}
+    </div>
+  {% endif %}
+  <div class="carousel-inner" style="height: 500px; border-bottom: 5px solid #228B22; padding-bottom: 10px;">
+    {% set banner_row = 0 %}
+    {% for carousel in banners|batch(items) %}
+      <div class="carousel-item{% if banner_row == 0 %} active{% endif %}">
+        <div class="row justify-content-start align-items-center" style="position: relative;">
+          {% for banner in carousel %}
+            <div class="col-{{ (12 / items)|round }} text-center">
+              <a href="{{ first_banner_link }}">
+                <img src="{{ banner.image }}" alt="{{ banner.title }}" class="img-fluid" style="margin-left: auto; display: block;" />
+              </a>
+            </div>
+          {% endfor %}
+          <div class="carousel-caption d-none d-md-block" style="position: absolute; bottom: 100px; left: 50px; text-align: left;">
+            <!-- Информация над текстом -->
+            <div style="font-size: 14px; font-weight: 500; color: #6c757d; margin-bottom: 10px;">
+              Livraison rapide, <span style="color: #EE8434;">à partir de 25 €</span>
+            </div>
+            <h2 style="font-size: 36px; font-weight: bold; margin-bottom: 20px; color: #333;">
+              Découvrez nos produits d’exception
+            </h2>
+            <button
+            style="
+              background-color: #EE8434;
+              color: white;
+              font-size: 16px;
+              font-weight: bold;
+              padding: 10px 20px;
+              border: none;
+              border-radius: 5px;
+              cursor: pointer;
+              transition: background-color 0.3s ease;"
+            onclick="document.getElementById('products-section').scrollIntoView({ behavior: 'smooth' });">
+            + à propos
+          </button>
+          </div>
+        </div>
+      </div>
+      {% set banner_row = banner_row + 1 %}
+    {% endfor %}
+  </div>
+  {% if controls and banners|batch(items)|length > 1 %}
+    <button type="button" class="carousel-control-prev" data-bs-target="#carousel-banner-{{ module }}" data-bs-slide="prev"><span class="fa-solid fa-chevron-left"></span></button>
+    <button type="button" class="carousel-control-next" data-bs-target="#carousel-banner-{{ module }}" data-bs-slide="next"><span class="fa-solid fa-chevron-right"></span></button>
+  {% endif %}
+</div>
+<script type="text/javascript"><!--
+$(document).ready(function () {
+    new bootstrap.Carousel(document.querySelector('#carousel-banner-{{ module }}'), {
+        ride: 'carousel',
+        interval: {{ interval|escape('js') }},
+        wrap: true
+    });
+});
+//--></script>

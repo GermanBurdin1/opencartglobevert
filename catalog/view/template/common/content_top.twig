@@ -1,0 +1,389 @@
+{% if route == 'common/home' %}
+<div class="custom-menu-container">
+  <script>
+    const breadcrumbDataRaw = '{{ breadcrumbs|json_encode|raw }}';
+    console.log("Raw breadcrumb data:", breadcrumbDataRaw);
+  </script>
+  <button class="custom-dropdown-toggle">Nos produits</button>
+  <button class="custom-dropdown-toggle about-button"
+    onclick="window.location.href='index.php?route=information/information&information_id=1'">
+    À propos de notre société
+  </button>
+
+  <ul class="custom-dropdown-menu">
+    {% if breadcrumbs %}
+    {% for category in breadcrumbs %}
+    <li class="custom-dropdown-item">
+      <a href="{{ category.href }}">{{ category.text }}</a>
+    </li>
+    {% endfor %}
+    {% else %}
+    <li class="custom-dropdown-item">Нет категорий</li>
+    {% endif %}
+  </ul>
+</div>
+{% endif %}
+<div id="header-cart-container" class="d-flex justify-content-end align-items-center mb-3">
+  {{ header_cart }}
+</div>
+{% if video_path %}
+<!-- Первый блок -->
+<div class="bbq-picnic-promo text-center position-relative" style="
+    background: radial-gradient(circle, rgba(186, 239, 140, 0.8) 60%, rgba(186, 239, 140, 0) 100%);
+    color: #333;
+    padding: 60px 20px;
+    max-width: 1200px;
+    margin: 50px auto;
+    border-radius: 20px;
+    overflow: hidden;
+  ">
+  <h2 class="fw-bold mb-3" style="font-family: 'Montserrat', sans-serif; color: #07140b;">Découvrez le BBQ-Picnic !</h2>
+  <div class="scrolling-container">
+    <ol class="usage-steps">
+      <li class="step">
+        <p class="step-description">Placez la boîte sur une surface plane (barbecue, cheminée ou autre).</p>
+      </li>
+      <li class="step">
+        <p class="step-description">Enflammez simplement la boîte grâce à ses bords inflammables.</p>
+      </li>
+      <li class="step">
+        <p class="step-description">Attendez que les braises soient prêtes, puis profitez de votre moment convivial.</p>
+      </li>
+    </ol>
+  </div>
+</div>
+
+<!-- Контейнер с видео -->
+<div style="display: flex; justify-content: center; align-items: center; height: 90vh; background-color: #f8f9fa;">
+  <div class="video-background-container" style="position: relative; width: 100%; max-width: 1200px; height: auto;">
+    <!-- Видео -->
+    <div class="video-container text-center"
+      style="position: relative; width: 100%; height: auto; display: flex; justify-content: center; align-items: center;">
+      <video id="myVideo" controls muted playsinline class="rounded shadow"
+        style="width: 100%; height: 100%; object-fit: cover;"
+        poster="../../../../image/catalog/boxhome.png">
+        <source src="image/video/my_video.mp4" type="video/mp4">
+        Ваш браузер не поддерживает видео.
+      </video>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Найти видео
+  const video = document.getElementById('myVideo');
+
+  video.volume = 0.3;
+
+  // Запуск видео через 5 секунд
+  setTimeout(() => {
+    video.play();
+  }, 5000);
+
+  // Убедиться, что постер заполняет весь плеер
+  video.addEventListener('loadedmetadata', () => {
+    video.style.objectFit = 'cover';
+  });
+</script>
+
+
+{# <div id="products-section" class="container-fluid px-5 my-5">
+  <div class="row justify-content-evenly">
+    <!-- Карточка товара 1 -->
+    <div class="col-12 col-sm-6 col-lg-4 mb-5 d-flex justify-content-center">
+      <div class="card shadow-lg" style="width: 100%; max-width: 450px;">
+        <!-- Изображение товара -->
+        <div
+          style="height: 350px; background: url('../../../../image/catalog/BBQ_BOX_Goodpicnic_Orange_v1.jpg') center/cover no-repeat;">
+        </div>
+        <!-- Текстовая информация -->
+        <div class="card-body text-center">
+          <h3 class="card-title">Nom du produit</h3>
+          <p class="card-text text-muted">Brève description du produit mettant en avant ses avantages et ses
+            caractéristiques.</p>
+          <div class="mb-4 text-primary font-weight-bold" style="font-size: 2rem;">12 €</div>
+          <button class="btn btn-success w-100" style="font-size: 1.5rem; padding: 15px;"
+            onclick="window.location.href='{{ first_banner_link }}';">
+            Ajouter dans le panier
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Карточка товара 2 -->
+    <div class="col-12 col-sm-6 col-lg-4 mb-5 d-flex justify-content-center">
+      <div class="card shadow-lg" style="width: 100%; max-width: 450px;">
+        <div
+          style="height: 350px; background: url('../../../../image/catalog/IMG-20210422-WA0008.jpg') center/cover no-repeat;">
+        </div>
+        <div class="card-body text-center">
+          <h3 class="card-title">Produit 2</h3>
+          <p class="card-text text-muted">Brève description du produit 2 mettant en avant ses avantages et ses
+            caractéristiques.</p>
+          <div class="mb-4 text-primary font-weight-bold" style="font-size: 2rem;">15 €</div>
+          <button class="btn btn-success w-100" style="font-size: 1.5rem; padding: 15px;"
+            onclick="window.location.href='{{ first_banner_link }}';">
+            Ajouter dans le panier
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Карточка товара 3 -->
+    <div class="col-12 col-sm-6 col-lg-4 mb-5 d-flex justify-content-center">
+      <div class="card shadow-lg" style="width: 100%; max-width: 450px;">
+        <div
+          style="height: 350px; background: url('../../../../image/catalog/IMG-20210616-WA0001.jpg') center/cover no-repeat;">
+        </div>
+        <div class="card-body text-center">
+          <h3 class="card-title">Produit 3</h3>
+          <p class="card-text text-muted">Brève описание товара 3 mettant в.</p>
+          <div class="mb-4 text-primary font-weight-bold" style="font-size: 2rem;">18 €</div>
+          <button class="btn btn-success w-100" style="font-size: 1.5rem; padding: 15px;"
+            onclick="window.location.href='{{ first_banner_link }}';">
+            Ajouter dans le panier
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> #}
+
+<div id="products-section" class="container-fluid px-5 my-5">
+  <div class="row">
+    <div class="col-12 text-center mb-4">
+      <h2 class="hit-title">Hit de vente</h2>
+    </div>
+    <!-- Описание товара -->
+    <div class="col-12 col-lg-4 d-flex align-items-center">
+      <section class="product-details">
+        <div class="feature-section">
+          <div class="feature-block">
+            <h4 class="feature-title">Praticité et efficacité</h4>
+            <p class="feature-description">
+              <strong>Cheminée intérieure rectangulaire :</strong> circulation optimale de l’air, accélérant l’allumage
+              et la combustion des briquettes.
+              <strong>Trous perforés :</strong> sur les côtés et le fond pour une <strong>meilleure
+                performance</strong>.
+            </p>
+          </div>
+          <div class="feature-block">
+            <h4 class="feature-title">Design écologique et compact</h4>
+            <p class="feature-description">
+              <strong>Carton inflammable :</strong> usage unique et <strong>entièrement recyclable</strong>. Design
+              <strong>léger</strong> et <strong>compact</strong> idéal pour les sorties en plein air.
+            </p>
+          </div>
+          <div class="feature-block">
+            <h4 class="feature-title">Polyvalence</h4>
+            <p class="feature-description">
+              Convient pour <strong>barbecues</strong>, <strong>cheminées</strong>, ou <strong>feux de camp</strong>.
+              Simple à installer et prêt à offrir des braises parfaites en un rien de temps.
+            </p>
+          </div>
+          <div class="feature-block">
+            <h4 class="feature-title">Transport et stockage facilités</h4>
+            <p class="feature-description">
+              <strong>Robuste</strong> et au design <strong>ingénieux</strong>, il est facile à transporter et à ranger.
+              La <strong>cheminée intérieure</strong> stabilise les briquettes pendant le transport.
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+
+    <!-- Вертикальный разделитель -->
+    <div class="col-lg-1 d-none d-lg-flex justify-content-center">
+      <div style="width: 1px; background-color: #ccc; height: 100%;"></div>
+    </div>
+
+    <!-- Карточка с перелистыванием изображений -->
+    <div class="col-12 col-lg-7 d-flex align-items-center">
+      <div class="card shadow-lg card-slider" style="width: 100%; max-width: 650px; margin-left: auto;">
+        <!-- Слайдер изображений -->
+        <div id="image-slider" style="height: 350px; position: relative; overflow: hidden; border-radius: 10px;">
+          <img src="../../../../image/catalog/BBQ_BOX_Goodpicnic_Orange_v1.jpg" alt="Slide 1" class="slider-image"
+            style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; opacity: 1; transition: opacity 1s;">
+          <img src="../../../../image/catalog/IMG-20210422-WA0008.jpg" alt="Slide 2" class="slider-image"
+            style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1s;">
+          <img src="../../../../image/catalog/IMG-20210616-WA0001.jpg" alt="Slide 3" class="slider-image"
+            style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1s;">
+        </div>
+        <!-- Текстовая информация -->
+        <div class="card-body text-center">
+          <div id="text-slider" class="text-slider">
+            <div class="benefit-block">
+              <span class="benefit-icon" style="font-size: 1.3rem; margin-right: 8px;">🔥</span>
+              <p class="benefit-text" style="font-size: 1.2rem; line-height: 1.6; font-weight: bold; color: #07140b;">
+                <strong>Allumage rapide et uniforme :</strong> Une conception unique pour un démarrage instantané et
+                sans effort.
+              </p>
+            </div>
+            <div class="benefit-block" style="display: none;">
+              <span class="benefit-icon" style="font-size: 1.3rem; margin-right: 8px;">✅</span>
+              <p class="benefit-text" style="font-size: 1.2rem; line-height: 1.6; font-weight: bold; color: #07140b;">
+                <strong>Sécurité :</strong> Pas besoin de toucher le charbon ou d'utiliser des produits chimiques
+                dangereux.
+              </p>
+            </div>
+            <div class="benefit-block" style="display: none;">
+              <span class="benefit-icon" style="font-size: 1.3rem; margin-right: 8px;">🌱</span>
+              <p class="benefit-text" style="font-size: 1.2rem; line-height: 1.6; font-weight: bold; color: #07140b;">
+                <strong>Écologique :</strong> Matériaux biodégradables respectueux de l'environnement.
+              </p>
+            </div>
+            <div class="benefit-block" style="display: none;">
+              <span class="benefit-icon" style="font-size: 1.3rem; margin-right: 8px;">📦</span>
+              <p class="benefit-text" style="font-size: 1.2rem; line-height: 1.6; font-weight: bold; color: #07140b;">
+                <strong>Prêt à l’emploi :</strong> Aucun assemblage compliqué, tout est intégré dans une boîte pratique.
+              </p>
+            </div>
+          </div>
+          <!-- Кнопка -->
+          <button class="btn btn-success mt-4" style="font-size: 1.5rem; padding: 15px; width: 100%;"
+            onclick="window.location.href='{{ first_banner_link }}';">
+            Voir plus d'infos
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  // JavaScript для переключения слайдов
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggleButton = document.querySelector('.custom-dropdown-toggle');
+    const dropdownMenu = document.querySelector('.custom-dropdown-menu');
+    const slides = document.querySelectorAll('.slider-image');
+    const texts = document.querySelectorAll('#text-slider .benefit-block');
+    let currentSlide = 0;
+
+    setInterval(() => {
+      // Скрыть текущий слайд и текст
+      slides[currentSlide].style.opacity = '0';
+      texts[currentSlide].style.display = 'none';
+
+      // Переключиться на следующий
+      currentSlide = (currentSlide + 1) % slides.length;
+
+      // Показать следующий слайд и текст
+      slides[currentSlide].style.opacity = '1';
+      texts[currentSlide].style.display = 'block';
+    }, 3000); // Интервал 3 секунды
+
+
+    // Получите данные breadcrumbs
+    const breadcrumbDataRaw = "{{ breadcrumbs|json_encode|e('js') }}";
+    let breadcrumbData;
+
+    try {
+      breadcrumbData = JSON.parse(breadcrumbDataRaw);
+    } catch (error) {
+      console.error('Ошибка парсинга JSON:', error);
+      return;
+    }
+
+    // Обработчик клика на кнопке
+    toggleButton.addEventListener('click', (e) => {
+      console.log("Кнопка была нажата.");
+
+      // Очистить текущее содержимое меню
+      dropdownMenu.innerHTML = '';
+      console.log("Содержимое меню очищено.");
+
+      // Добавить элементы меню из данных
+      if (breadcrumbData && breadcrumbData.length > 0) {
+        console.log("Добавляем элементы из breadcrumbData.");
+        breadcrumbData.forEach((item) => {
+          console.log("Добавление элемента:", item);
+          const listItem = document.createElement('li');
+          listItem.className = 'custom-dropdown-item';
+          listItem.innerHTML = `<a href="${item.href}">${item.text}</a>`;
+          dropdownMenu.appendChild(listItem);
+        });
+      } else {
+        console.warn("Данные breadcrumbData пусты или отсутствуют.");
+        const emptyItem = document.createElement('li');
+        emptyItem.className = 'custom-dropdown-item';
+        emptyItem.textContent = 'Нет категорий';
+        dropdownMenu.appendChild(emptyItem);
+      }
+
+      // Показать или скрыть меню
+      if (dropdownMenu.style.display === 'block') {
+        console.log("Скрываем меню.");
+        dropdownMenu.style.display = 'none'; // Скрыть меню
+      } else {
+        console.log("Отображаем меню.");
+        dropdownMenu.style.display = 'block'; // Показать меню
+      }
+
+      e.stopPropagation(); // Остановить всплытие события
+    });
+
+    // Закрыть меню при клике вне его области
+    document.addEventListener('click', (e) => {
+      console.log("Клик за пределами меню. Скрываем меню.");
+      dropdownMenu.style.display = 'none';
+    });
+  });
+</script>
+
+
+
+{#
+
+<!-- Третий блок -->
+<div class="info-banner my-5 py-5 px-4 rounded shadow-lg text-center position-relative"
+  style="position: relative; overflow: hidden; background-color: #baef8c;">
+  <p class="fs-4 mb-5" style="line-height: 1.8; color: #07140b; z-index: 2; position: relative;">
+    Avec BBQ-Picnic, vous pouvez profiter de moments inoubliables en plein air, sans complications ni stress.
+    Parfait pour toutes les occasions !
+  </p>
+  <p class="fs-4 mb-5" style="line-height: 1.8; color: #07140b; z-index: 2; position: relative;">
+    Avec BBQ-Picnic, vous pouvez profiter de moments inoubliables en plein air, sans complications ni stress.
+    Parfait pour toutes les occasions !
+  </p>
+  <p class="fs-4 mb-5" style="line-height: 1.8; color: #07140b; z-index: 2; position: relative;">
+    Avec BBQ-Picnic, vous pouvez profiter de moments inoubliables en plein air, sans complications ni stress.
+    Parfait pour toutes les occasions !
+  </p>
+
+</div>
+
+<!-- Второй блок -->
+<div class="cta-wrapper d-flex justify-content-center my-5">
+  <div class="card info-banner text-center shadow-lg rounded"
+    style="max-width: 600px; overflow: hidden; position: relative;">
+    <div class="card-body" style="z-index: 2; position: relative;">
+      <h3 class="fw-bold mb-3" style="font-family: 'Roboto', sans-serif; color: #fbfffc; font-size: 1.5rem;">
+        Profitez d'une expérience de barbecue exceptionnelle !
+      </h3>
+      <p class="fs-5 mb-4" style="line-height: 1.8; color: #07140b;">
+        Avec BBQ-Picnic, vous pouvez profiter de moments inoubliables en plein air, sans complications ni stress.
+        Parfait pour toutes les occasions !
+      </p>
+      <a href="#features" class="btn btn-lg px-4 shadow-sm"
+        style="font-weight: bold; border-radius: 50px; transition: background-color 0.3s, transform 0.3s; background-color: #EE8434; color: #fff; border: none; font-size: 1.2rem;">
+        En savoir plus
+      </a>
+    </div>
+  </div>
+</div> #}
+
+{% endif %}
+
+{# document.getElementById('categories-dropdown').addEventListener('click', (e) => {
+const dropdownMenu = document.getElementById('dropdown-menu');
+dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+e.stopPropagation();
+});
+
+
+document.addEventListener('click', (e) => {
+const dropdownMenu = document.getElementById('dropdown-menu');
+if (dropdownMenu && dropdownMenu.style.display === 'block') {
+dropdownMenu.style.display = 'none';
+}
+}); #}

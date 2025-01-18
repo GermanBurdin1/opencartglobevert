@@ -1,0 +1,87 @@
+<form action="{{ action }}" method="post" id="stripe-payment-form">
+  <div class="form-group">
+    <label for="cardholder-name">Titulaire de la carte</label>
+    <input type="text" id="cardholder-name" class="form-control" placeholder="Nom du titulaire" required />
+  </div>
+
+  <!-- Поле для номера карты -->
+  <div class="form-group" style="margin-top: 20px;">
+    <label for="card-number">Numéro de carte</label>
+    <div id="card-number"></div>
+  </div>
+
+  <!-- Поле для срока действия -->
+  <div class="form-group" style="margin-top: 20px;">
+    <label for="card-expiry">Date d'expiration</label>
+    <div id="card-expiry"></div>
+  </div>
+
+  <!-- Поле для CVC -->
+  <div class="form-group" style="margin-top: 20px;">
+    <label for="card-cvc">CVC</label>
+    <div id="card-cvc"></div>
+  </div>
+
+  <div id="card-errors" role="alert" style="color: red; margin-top: 10px;"></div>
+  <button type="submit" class="btn btn-primary mt-3">Payer</button>
+</form>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+  var stripe = Stripe('pk_test_51Qb3cWGaUr31i20XRiurDRW2WZzxuaFCQWTHQGzPbFqUOzha4GBz3jIHTLHChC9o7E3aflhABxcRLWYSswDLzQrq00QqZAFkCO');
+  var elements = stripe.elements();
+
+  var style = {
+    base: {
+      color: '#32325d',
+      fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+      fontSmoothing: 'antialiased',
+      fontSize: '16px',
+      '::placeholder': {
+        color: '#aab7c4'
+      }
+    },
+    invalid: {
+      color: '#fa755a',
+      iconColor: '#fa755a'
+    }
+  };
+
+  // Создаём элементы отдельно
+  var cardNumber = elements.create('cardNumber', { style: style });
+  cardNumber.mount('#card-number');
+
+  var cardExpiry = elements.create('cardExpiry', { style: style });
+  cardExpiry.mount('#card-expiry');
+
+  var cardCvc = elements.create('cardCvc', { style: style });
+  cardCvc.mount('#card-cvc');
+
+  var form = document.getElementById('stripe-payment-form');
+  var cardholderName = document.getElementById('cardholder-name');
+
+  form.addEventListener('submit', async function (event) {
+    event.preventDefault();
+
+    const { paymentMethod, error } = await stripe.createPaymentMethod({
+      type: 'card',
+      card: cardNumber,
+      billing_details: {
+        name: cardholderName.value
+      },
+    });
+
+    if (error) {
+      console.log(error.message);
+      document.getElementById('card-errors').textContent = error.message;
+    } else {
+      var input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = 'paymentMethodId';
+      input.value = paymentMethod.id;
+      form.appendChild(input);
+
+      form.submit();
+    }
+  });
+</script>

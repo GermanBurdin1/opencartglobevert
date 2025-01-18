@@ -1,0 +1,17 @@
+{
+    "name": "germa/opencart-globevert",
+    "require": {
+        "stripe/stripe-php": "^16.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Germa\\OpencartGlobevert\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "German",
+            "email": "125369843+GermanBurdin1@users.noreply.github.com"
+        }
+    ]
+}

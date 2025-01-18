@@ -1,0 +1,35 @@
+<div class="product-thumb orange-theme p-3 rounded shadow-lg full-width">
+  <div class="image mb-3">
+    <a href="{{ href }}">
+      <img src="{{ thumb }}" alt="{{ name }}" title="{{ name }}" class="img-fluid rounded">
+    </a>
+  </div>
+  <div class="content text-center">
+    <div class="description mb-3">
+      <h4 class="product-title mb-2"><a href="{{ href }}">{{ name }}</a></h4>
+      <p class="product-description text-muted">{{ description }}</p>
+    </div>
+    {% if price %}
+      <div class="price mb-3">
+        {% if not special %}
+          <span class="price-new fw-bold">{{ price }}</span>
+        {% else %}
+          <span class="price-new fw-bold">{{ special }}</span>
+          <span class="price-old text-decoration-line-through text-muted">{{ price }}</span>
+        {% endif %}
+        {% if tax %}
+          <div class="price-tax small text-muted">{{ text_tax }} {{ tax }}</div>
+        {% endif %}
+      </div>
+    {% endif %}
+    <form method="post" data-oc-toggle="ajax" data-oc-load="{{ cart }}" data-oc-target="#header-cart">
+      <div class="button-group d-flex justify-content-center gap-2">
+        <button type="submit" formaction="{{ add_to_cart }}" class="btn btn-success"><i class="fa-solid fa-shopping-cart"></i></button>
+        {# <button type="submit" formaction="{{ add_to_wishlist }}" class="btn btn-warning"><i class="fa-solid fa-heart"></i></button>
+        <button type="submit" formaction="{{ add_to_compare }}" class="btn btn-info"><i class="fa-solid fa-arrow-right-arrow-left"></i></button> #}
+      </div>
+      <input type="hidden" name="product_id" value="{{ product_id }}"/>
+      <input type="hidden" name="quantity" value="{{ minimum }}"/>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,343 @@
+{{ header }}
+<div id="information-information" class="container">
+  {# <ul class="breadcrumb">
+    {% for breadcrumb in breadcrumbs %}
+    <li class="breadcrumb-item"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+    {% endfor %}
+  </ul> #}
+  <div class="row">{{ column_left }}
+    <div id="content" class="col">
+      {# {{ content_top }}
+      <h1>{{ heading_title }}</h1>
+      {{ description }}{{ content_bottom }}
+    </div>
+    {{ column_right }} #}
+    <div class="information-container">
+      {% if information_id == 1 %}
+      <section class="company-section"
+        style="padding: 20px; background-color: #f9f9f9; border-radius: 10px; border: 1px solid #ddd; margin-bottom: 20px;">
+        <h2 class="section-title" style="color: #ff6a00; font-weight: bold; text-align: center; margin-bottom: 20px;">
+          Société GlobeVert SAS</h2>
+        <p class="company-description" style="color: #333; font-size: 16px; line-height: 1.6; margin-bottom: 15px;">
+          La société <strong style="color: #66c266;">GlobeVert SAS</strong> a été créée pour distribuer efficacement les
+          produits en bois sur le marché français.
+          Elle s’appuie sur l’expérience de la société-partenaire <strong style="color: #ff6a00;">GreenWay Ltd</strong>
+          déjà bien implantée sur le marché
+          européen avec des moyens de production importants et à un coût très compétitif.
+        </p>
+        <p class="company-description" style="color: #333; font-size: 16px; line-height: 1.6; margin-bottom: 15px;">
+          Notre société adapte les produits de notre partenaire au marché français, gère les problèmes administratifs,
+          logistiques et comptables.
+        </p>
+        <p class="company-description" style="color: #333; font-size: 16px; line-height: 1.6;">
+          Nous effectuons également un accompagnement marketing.
+        </p>
+      </section>
+
+      <section class="production-section"
+        style="padding: 20px; background-color: #f9f9f9; border-radius: 10px; border: 1px solid #ddd; margin-bottom: 20px;">
+        <h3 class="section-title" style="color: #ff6a00; font-weight: bold; margin-bottom: 15px;">Nos moyens de
+          production</h3>
+        <p class="production-description" style="color: #333; font-size: 16px; line-height: 1.6; margin-bottom: 15px;">
+          Notre fabricant dispose d’une usine en Ukraine :
+        </p>
+        <ul class="production-list"
+          style="color: #333; font-size: 16px; line-height: 1.6; margin-bottom: 15px; list-style-type: disc; padding-left: 20px;">
+          <li>Accès aux ressources naturelles importantes et main d’œuvre compétitive.</li>
+          <li>Une filiale en Slovaquie pour faciliter les démarches administratives.</li>
+          <li>Une société française pour gérer la production pour clients français qui travaille en exclusivité.</li>
+        </ul>
+      </section>
+
+      <section class="products-section"
+        style="padding: 20px; background-color: #f9f9f9; border-radius: 10px; border: 1px solid #ddd; margin-bottom: 20px;">
+        <h3 class="section-title" style="color: #ff6a00; font-weight: bold; margin-bottom: 15px;">Nos produits</h3>
+        <ul class="product-list"
+          style="color: #333; font-size: 16px; line-height: 1.6; margin-bottom: 15px; list-style-type: disc; padding-left: 20px;">
+          <li>Palettes</li>
+          <li>Briquettes</li>
+          <li>Granulés</li>
+          <li>Planches sur mesure</li>
+          <li>Kit BBQ</li>
+          <li>Kit construction</li>
+        </ul>
+        <p class="product-description" style="color: #333; font-size: 16px; line-height: 1.6; margin-bottom: 15px;">
+          Briquettes en bois durs - Chêne, charme, aulne, bouleau.
+        </p>
+        <p class="product-description" style="color: #333; font-size: 16px; line-height: 1.6; margin-bottom: 15px;">
+          Conditionnés en sac de 10kg. Livraison de 960kg/palette. 23 palettes par camion soit 22 540kg.
+        </p>
+        <p class="product-description" style="color: #333; font-size: 16px; line-height: 1.6; margin-bottom: 15px;">
+          Tarifs pour un prépaiement à la commande.
+        </p>
+        <p class="product-description" style="color: #333; font-size: 16px; line-height: 1.6; margin-bottom: 15px;">
+          GlobeVert peut proposer des conditions de paiement différentes avec une tarification différente.
+        </p>
+        <p class="product-description" style="color: #333; font-size: 16px; line-height: 1.6;">
+          La production des briquettes (matériau, emballage) peut être adaptée à la demande du client.
+        </p>
+      </section>
+
+      {% endif %}
+
+      {% if information_id == 2 %}
+      <div id="information-conditions" class="container">
+        <div class="row">
+          <div id="content" class="col">
+            <h1 class="section-title">Conditions Générales de Vente</h1>
+            <section class="terms-section">
+              <h3 class="terms-title">1. Objet</h3>
+              <p class="terms-text">
+                Les présentes conditions générales de vente régissent les relations contractuelles entre GlobeVert SAS
+                et
+                ses clients,
+                dans le cadre de la vente de produits proposés sur le site.
+              </p>
+            </section>
+            <section class="terms-section">
+              <h3 class="terms-title">2. Commandes</h3>
+              <p class="terms-text">
+                Toute commande implique l'acceptation sans réserve des présentes conditions générales. Les commandes
+                sont
+                confirmées par un email récapitulatif.
+              </p>
+            </section>
+            <section class="terms-section">
+              <h3 class="terms-title">3. Tarifs</h3>
+              <p class="terms-text">
+                Les prix indiqués sur le site sont exprimés en euros et incluent toutes les taxes applicables, sauf
+                indication contraire.
+                GlobeVert SAS se réserve le droit de modifier ses prix à tout moment.
+              </p>
+            </section>
+            <section class="terms-section">
+              <h3 class="terms-title">4. Modalités de paiement</h3>
+              <p class="terms-text">
+                Le paiement s'effectue lors de la commande via les moyens proposés (carte bancaire, virement, etc.). Des
+                conditions spécifiques peuvent être négociées avec GlobeVert SAS.
+              </p>
+            </section>
+            <section class="terms-section">
+              <h3 class="terms-title">5. Livraison</h3>
+              <p class="terms-text">
+                Les produits sont livrés à l'adresse indiquée par le client lors de la commande. Les délais de livraison
+                sont donnés à titre indicatif et peuvent varier selon les disponibilités des produits.
+              </p>
+            </section>
+            <section class="terms-section">
+              <h3 class="terms-title">6. Garantie et retours</h3>
+              <p class="terms-text">
+                Les produits bénéficient d'une garantie légale de conformité. Les retours sont acceptés dans un délai de
+                14
+                jours après réception, sous réserve que le produit soit retourné dans son emballage d'origine.
+              </p>
+            </section>
+            <section class="terms-section">
+              <h3 class="terms-title">7. Confidentialité</h3>
+              <p class="terms-text">
+                GlobeVert SAS s'engage à protéger les données personnelles de ses clients conformément à la
+                réglementation
+                en vigueur.
+              </p>
+            </section>
+            <section class="terms-section">
+              <h3 class="terms-title">8. Loi applicable</h3>
+              <p class="terms-text">
+                Les présentes conditions générales sont régies par la loi française. En cas de litige, les tribunaux
+                français seront seuls compétents.
+              </p>
+            </section>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      {% if information_id == 3 %}
+      <div id="privacy-policy" class="container">
+        <div class="row">
+          <div class="col-12">
+            <h1 class="text-center mb-5" style="color: #66c266; font-size: 2.5rem; font-weight: bold;">Politique de
+              confidentialité</h1>
+            <p style="font-size: 1.2rem; line-height: 1.8;">
+              Chez <strong>GlobeVert SAS</strong>, nous accordons une grande importance à la protection de vos données
+              personnelles. Cette politique de confidentialité décrit comment nous collectons, utilisons et protégeons
+              vos informations lors de votre utilisation de notre site.
+            </p>
+
+            <section class="mb-4">
+              <h2 class="section-title"
+                style="color: #07140b; font-size: 1.8rem; font-weight: bold; margin-bottom: 1rem;">Collecte des
+                informations</h2>
+              <p style="font-size: 1.2rem; line-height: 1.8;">
+                Nous collectons vos informations personnelles uniquement lorsque vous les fournissez volontairement, par
+                exemple lors de la création d’un compte, de la commande de produits ou de l'inscription à notre
+                newsletter.
+              </p>
+              <ul style="font-size: 1.2rem; line-height: 1.8; margin-left: 1.5rem;">
+                <li>Nom et prénom</li>
+                <li>Adresse e-mail</li>
+                <li>Adresse de livraison</li>
+                <li>Numéro de téléphone</li>
+                <li>Données de paiement (traitées via des plateformes sécurisées)</li>
+              </ul>
+            </section>
+
+            <section class="mb-4">
+              <h2 class="section-title"
+                style="color: #07140b; font-size: 1.8rem; font-weight: bold; margin-bottom: 1rem;">Utilisation des
+                informations</h2>
+              <p style="font-size: 1.2rem; line-height: 1.8;">
+                Les informations collectées sont utilisées pour :
+              </p>
+              <ul style="font-size: 1.2rem; line-height: 1.8; margin-left: 1.5rem;">
+                <li>Traiter vos commandes et livraisons</li>
+                <li>Gérer votre compte client</li>
+                <li>Envoyer des newsletters et des offres promotionnelles (si vous y avez consenti)</li>
+                <li>Améliorer nos services et votre expérience utilisateur</li>
+              </ul>
+            </section>
+
+            <section class="mb-4">
+              <h2 class="section-title"
+                style="color: #07140b; font-size: 1.8rem; font-weight: bold; margin-bottom: 1rem;">Protection des
+                données</h2>
+              <p style="font-size: 1.2rem; line-height: 1.8;">
+                Nous prenons des mesures de sécurité techniques et organisationnelles pour protéger vos données contre
+                tout accès non autorisé, perte ou divulgation.
+              </p>
+              <ul style="font-size: 1.2rem; line-height: 1.8; margin-left: 1.5rem;">
+                <li>Stockage sécurisé sur des serveurs protégés</li>
+                <li>Cryptage des données sensibles</li>
+                <li>Accès limité aux employés autorisés uniquement</li>
+              </ul>
+            </section>
+
+            <section class="mb-4">
+              <h2 class="section-title"
+                style="color: #07140b; font-size: 1.8rem; font-weight: bold; margin-bottom: 1rem;">Vos droits</h2>
+              <p style="font-size: 1.2rem; line-height: 1.8;">
+                Conformément à la réglementation RGPD, vous disposez des droits suivants concernant vos données
+                personnelles :
+              </p>
+              <ul style="font-size: 1.2rem; line-height: 1.8; margin-left: 1.5rem;">
+                <li>Accès à vos données personnelles</li>
+                <li>Correction des informations inexactes</li>
+                <li>Suppression de vos données sur demande</li>
+                <li>Opposition au traitement à des fins marketing</li>
+              </ul>
+              <p style="font-size: 1.2rem; line-height: 1.8;">
+                Pour exercer vos droits, veuillez nous contacter à l’adresse e-mail suivante : <a
+                  href="mailto:contact@globevert.com">contact@globevert.com</a>.
+              </p>
+            </section>
+
+            <section class="mb-4">
+              <h2 class="section-title"
+                style="color: #07140b; font-size: 1.8rem; font-weight: bold; margin-bottom: 1rem;">Modifications de la
+                politique</h2>
+              <p style="font-size: 1.2rem; line-height: 1.8;">
+                Nous nous réservons le droit de modifier cette politique de confidentialité à tout moment. Toute
+                modification sera publiée sur cette page. Nous vous invitons à consulter régulièrement notre politique
+                pour rester informé.
+              </p>
+            </section>
+
+            <p style="text-align: center; font-size: 1.2rem; margin-top: 2rem;">
+              Merci de votre confiance. Votre vie privée est notre priorité.
+            </p>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      {% if information_id == 4 %}
+      <div id="delivery-information" class="container">
+        <div class="row">
+          <div class="col-12">
+            <h1 class="text-center mb-5" style="color: #66c266; font-size: 2.5rem; font-weight: bold;">Informations sur
+              la livraison</h1>
+            <p style="font-size: 1.2rem; line-height: 1.8;">
+              Chez <strong>GlobeVert SAS</strong>, nous nous engageons à offrir des options de livraison fiables et
+              rapides. Voici tout ce que vous devez savoir sur notre processus de livraison.
+            </p>
+
+            <section class="mb-4">
+              <h2 class="section-title"
+                style="color: #07140b; font-size: 1.8rem; font-weight: bold; margin-bottom: 1rem;">Modes de livraison
+              </h2>
+              <p style="font-size: 1.2rem; line-height: 1.8;">
+                Nous proposons plusieurs modes de livraison pour répondre à vos besoins :
+              </p>
+              <ul style="font-size: 1.2rem; line-height: 1.8; margin-left: 1.5rem;">
+                <li><strong>Livraison standard :</strong> Livraison sous 5 à 7 jours ouvrables.</li>
+                <li><strong>Livraison express :</strong> Livraison sous 1 à 2 jours ouvrables.</li>
+                <li><strong>Retrait en magasin :</strong> Disponible dans nos points de retrait partenaires.</li>
+              </ul>
+            </section>
+
+            <section class="mb-4">
+              <h2 class="section-title"
+                style="color: #07140b; font-size: 1.8rem; font-weight: bold; margin-bottom: 1rem;">Coûts de livraison
+              </h2>
+              <p style="font-size: 1.2rem; line-height: 1.8;">
+                Les frais de livraison sont calculés en fonction du poids total de votre commande, de la destination et
+                du mode de livraison choisi :
+              </p>
+              <ul style="font-size: 1.2rem; line-height: 1.8; margin-left: 1.5rem;">
+                <li><strong>Livraison standard :</strong> À partir de 10 € pour les commandes jusqu’à 10 kg.</li>
+                <li><strong>Livraison express :</strong> À partir de 20 € pour les commandes jusqu’à 10 kg.</li>
+                <li><strong>Livraison gratuite :</strong> Disponible pour les commandes de plus de 200 €.</li>
+              </ul>
+            </section>
+
+            <section class="mb-4">
+              <h2 class="section-title"
+                style="color: #07140b; font-size: 1.8rem; font-weight: bold; margin-bottom: 1rem;">Délais de livraison
+              </h2>
+              <p style="font-size: 1.2rem; line-height: 1.8;">
+                Nous nous efforçons de respecter les délais suivants :
+              </p>
+              <ul style="font-size: 1.2rem; line-height: 1.8; margin-left: 1.5rem;">
+                <li><strong>Livraison standard :</strong> 5 à 7 jours ouvrables.</li>
+                <li><strong>Livraison express :</strong> 1 à 2 jours ouvrables.</li>
+              </ul>
+              <p style="font-size: 1.2rem; line-height: 1.8;">
+                Veuillez noter que les délais peuvent varier en fonction de la disponibilité des produits et de la
+                localisation.
+              </p>
+            </section>
+
+            <section class="mb-4">
+              <h2 class="section-title"
+                style="color: #07140b; font-size: 1.8rem; font-weight: bold; margin-bottom: 1rem;">Suivi de votre
+                commande</h2>
+              <p style="font-size: 1.2rem; line-height: 1.8;">
+                Une fois votre commande expédiée, vous recevrez un e-mail contenant un numéro de suivi. Vous pourrez
+                suivre l’avancement de votre livraison sur le site du transporteur.
+              </p>
+            </section>
+
+            <section class="mb-4">
+              <h2 class="section-title"
+                style="color: #07140b; font-size: 1.8rem; font-weight: bold; margin-bottom: 1rem;">Politique de retour
+              </h2>
+              <p style="font-size: 1.2rem; line-height: 1.8;">
+                Si vous n’êtes pas satisfait de votre commande, vous pouvez la retourner dans un délai de 14 jours
+                suivant la réception. Pour plus de détails, veuillez consulter notre <a
+                  href="index.php?route=information/information&information_id=3" style="color: #66c266;">politique de
+                  retour</a>.
+              </p>
+            </section>
+
+            <p style="text-align: center; font-size: 1.2rem; margin-top: 2rem;">
+              Si vous avez des questions, n’hésitez pas à nous contacter à l’adresse suivante : <a
+                href="mailto:contact@globevert.com">contact@globevert.com</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+    </div>
+
+  </div>
+</div>
+{{ footer }}
