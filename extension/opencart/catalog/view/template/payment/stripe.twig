@@ -63,6 +63,7 @@
   form.addEventListener('submit', async function (event) {
     event.preventDefault();
 
+    // Создаём PaymentMethod с помощью Stripe
     const { paymentMethod, error } = await stripe.createPaymentMethod({
       type: 'card',
       card: cardNumber,
@@ -75,13 +76,51 @@
       console.log(error.message);
       document.getElementById('card-errors').textContent = error.message;
     } else {
+      // Добавляем скрытое поле с paymentMethodId
       var input = document.createElement('input');
       input.type = 'hidden';
       input.name = 'paymentMethodId';
       input.value = paymentMethod.id;
       form.appendChild(input);
 
-      form.submit();
+      // Собираем данные формы, включая новый input
+      const formData = new FormData(form);
+
+      // Отправляем запрос через fetch
+      fetch(form.action, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(new FormData(form))
+      })
+        .then(response => {
+          console.log('Raw response:', response); // Временный лог
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.text().then(text => {
+            try {
+              return JSON.parse(text); // Пытаемся распарсить как JSON
+            } catch (error) {
+              console.error('Ответ сервера не JSON:', text); // Логируем HTML или некорректный JSON
+              throw new Error('Некорректный формат ответа. Ожидается JSON.');
+            }
+          });
+        })
+        .then(data => {
+          if (data.redirect) {
+            // Переходим на страницу успеха
+            window.location.href = data.redirect;
+          } else if (data.error) {
+            // Выводим ошибку
+            document.getElementById('card-errors').textContent = data.error;
+          }
+        })
+        .catch(error => {
+          console.error('Ошибка при отправке запроса:', error);
+          document.getElementById('card-errors').textContent = 'Произошла ошибка. Попробуйте ещё раз.';
+        });
+
     }
   });
+
 </script>

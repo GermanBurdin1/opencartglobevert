@@ -16,10 +16,30 @@ class Event extends \Opencart\System\Engine\Controller {
 		$results = $this->model_setting_event->getEvents();
 
 		if (isset($this->request->get['route']) && $this->request->get['route'] == 'extension/opencart/payment/stripecustom/confirm') {
+            $this->log->write('Custom route detected: ' . $this->request->get['route']);
+
+            // Подключаем контроллер
             require_once DIR_EXTENSION . 'opencart/catalog/controller/payment/stripecustom.php';
-            $controller = new \Opencart\Catalog\Controller\Extension\Opencart\Payment\StripeCustom($this->registry);
-            $controller->confirm();
-            return;
+
+            // Проверяем существование класса
+            if (class_exists('\Opencart\Catalog\Controller\Extension\Opencart\Payment\StripeCustom')) {
+                $controller = new \Opencart\Catalog\Controller\Extension\Opencart\Payment\StripeCustom($this->registry);
+
+                // Проверяем существование метода
+                if (method_exists($controller, 'confirm')) {
+                    $controller->confirm();
+                    exit; // Завершаем выполнение после успешного вызова метода
+                } else {
+                    $this->log->write('Error: confirm method does not exist in StripeCustom controller.');
+                }
+            } else {
+                $this->log->write('Error: StripeCustom controller class not found.');
+            }
+
+            // Если что-то пошло не так, возвращаем JSON с ошибкой
+            $this->response->addHeader('Content-Type: application/json');
+            $this->response->setOutput(json_encode(['error' => 'Invalid route']));
+            exit; // Завершаем выполнение, чтобы не отображался HTML
         }
 
 

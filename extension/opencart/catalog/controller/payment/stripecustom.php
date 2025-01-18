@@ -96,5 +96,9 @@ class StripeCustom extends \Opencart\System\Engine\Controller
 
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));
+		$this->log->write('Confirm method response: ' . json_encode($json));
+		header('Content-Type: application/json'); // Явно устанавливаем заголовок
+		echo json_encode($json);
+		exit;
 	}
 }
