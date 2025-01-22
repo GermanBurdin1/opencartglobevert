@@ -327,50 +327,55 @@ $(document).on('submit', 'form', function (e) {
                 $(button).button('reset');
             },
             success: function (json, textStatus) {
-                console.log(json);
-                console.log(textStatus);
+				console.log(json);
+				console.log(textStatus);
 
-                $('.alert-dismissible').remove();
-                $(element).find('.is-invalid').removeClass('is-invalid');
-                $(element).find('.invalid-feedback').removeClass('d-block');
+				// Удаляем предыдущие сообщения об ошибке
+				$('.alert-dismissible').remove();
+				$(element).find('.is-invalid').removeClass('is-invalid');
+				$(element).find('.invalid-feedback').removeClass('d-block');
 
-                if (json['redirect']) {
-                    location = json['redirect'];
-                }
+				// Перенаправление, если задано
+				if (json['redirect']) {
+					location = json['redirect'];
+				}
 
-                if (typeof json['error'] == 'string') {
-                    $('#alert').prepend('<div class="alert alert-danger alert-dismissible"><i class="fa-solid fa-circle-exclamation"></i> ' + json['error'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
-                }
+				// Обработка ошибок
+				if (typeof json['error'] == 'string') {
+					$('#alert').prepend('<div class="alert alert-danger alert-dismissible"><i class="fa-solid fa-circle-exclamation"></i> ' + json['error'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
+				}
 
-                if (typeof json['error'] == 'object') {
-                    if (json['error']['warning']) {
-                        $('#alert').prepend('<dirv class="alert alert-danger alert-dismissible"><i class="fa-solid fa-circle-exclamation"></i> ' + json['error']['warning'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></dirv>');
-                    }
+				if (typeof json['error'] == 'object') {
+					if (json['error']['warning']) {
+						$('#alert').prepend('<div class="alert alert-danger alert-dismissible"><i class="fa-solid fa-circle-exclamation"></i> ' + json['error']['warning'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
+					}
 
-                    for (key in json['error']) {
-                        $('#input-' + key.replaceAll('_', '-')).addClass('is-invalid').find('.form-control, .form-select, .form-check-input, .form-check-label').addClass('is-invalid');
-                        $('#error-' + key.replaceAll('_', '-')).html(json['error'][key]).addClass('d-block');
-                    }
-                }
+					for (key in json['error']) {
+						$('#input-' + key.replaceAll('_', '-')).addClass('is-invalid').find('.form-control, .form-select, .form-check-input, .form-check-label').addClass('is-invalid');
+						$('#error-' + key.replaceAll('_', '-')).html(json['error'][key]).addClass('d-block');
+					}
+				}
 
-                if (json['success']) {
-                    $('#alert').prepend('<div class="alert alert-success alert-dismissible"><i class="fa-solid fa-circle-check"></i> ' + json['success'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
+				// Успешный результат
+				if (json['success']) {
+					$('#alert').prepend('<div class="alert alert-success alert-dismissible"><i class="fa-solid fa-circle-check"></i> ' + json['success'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
 
-                    // Refresh
-                    var url = $(form).attr('data-oc-load');
-                    var target = $(form).attr('data-oc-target');
+					// Обновляем содержимое корзины
+					$('#header-cart-container').load('index.php?route=common/cart.info', function (response, status, xhr) {
+						if (status === 'success') {
+							console.log('Cart container updated successfully.');
+						} else {
+							console.error('Error updating cart container:', status);
+						}
+					});
+				}
 
-                    if (url !== undefined && target !== undefined) {
-                        $(target).load(url);
-                    }
-                }
-
-                // Replace any form values that correspond to form names.
-                for (key in json) {
-                    $(element).find('[name=\'' + key + '\']').val(json[key]);
-                }
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
+				// Замена значений формы, если они есть в ответе
+				for (key in json) {
+					$(element).find('[name=\'' + key + '\']').val(json[key]);
+				}
+			},
+			    error: function (xhr, ajaxOptions, thrownError) {
                 console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
             }
         });
