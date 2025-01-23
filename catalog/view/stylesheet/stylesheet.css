@@ -638,14 +638,14 @@ footer h5 {
 }
 
 .feature-title {
-	font-size: 1.5rem;
+	font-size: 1.3rem;
 	color: #ee8434;
 	font-weight: bold;
 	margin-bottom: 1rem;
 }
 
 .feature-description {
-	font-size: 1.2rem;
+	font-size: 1.1rem;
 	line-height: 1.8;
 	color: #495057;
 }
@@ -875,7 +875,7 @@ footer h5 {
 /* Описание шага */
 .step-description {
 	font-family: "Montserrat", sans-serif;
-	font-size: 1.6rem; /* Увеличенный шрифт */
+	font-size: 1.2rem; /* Увеличенный шрифт */
 	color: #07140b;
 	margin: 0;
 	line-height: 1.5; /* Увеличиваем высоту строки для избежания обрезки */
