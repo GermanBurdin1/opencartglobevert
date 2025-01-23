@@ -87,7 +87,7 @@ class StripeCustom extends \Opencart\System\Engine\Controller
 					// Обновление статуса заказа
 					$this->model_checkout_order->addHistory(
 						$order_id,
-						(int)$this->config->get('payment_stripe_order_status_id'),
+						17,
 						$comment,
 						true
 					);
