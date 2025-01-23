@@ -16,6 +16,13 @@ class StripeCustom extends \Opencart\System\Engine\Controller
 		$data['language'] = $this->config->get('config_language');
 		$data['action'] = $this->url->link('extension/opencart/payment/stripecustom/confirm', '', true);
 
+		// Добавляем order_id из сессии
+		if (isset($this->session->data['order_id'])) {
+			$data['order_id'] = $this->session->data['order_id'];
+			$this->log->write('Order ID found in session: ' . $this->session->data['order_id']);
+		} else {
+			$this->log->write('Order ID not found in session!');
+		}
 
 		// Рендеринг шаблона
 		$html = $this->load->view('extension/opencart/payment/stripe', $data);

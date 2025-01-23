@@ -1,4 +1,5 @@
 <form action="{{ action }}" method="post" id="stripe-payment-form">
+  <input type="hidden" name="order_id" value="{{ order_id }}">
   <div class="form-group">
     <label for="cardholder-name">Titulaire de la carte</label>
     <input type="text" id="cardholder-name" class="form-control" placeholder="Nom du titulaire" required />
@@ -85,6 +86,7 @@
 
       // Собираем данные формы, включая новый input
       const formData = new FormData(form);
+      formData.append('order_id', '{{ order_id }}');
 
       // Отправляем запрос через fetch
       fetch(form.action, {

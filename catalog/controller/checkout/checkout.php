@@ -10,6 +10,19 @@ class Checkout extends \Opencart\System\Engine\Controller {
 	 * @return void
 	 */
 	public function index(): void {
+		if (!isset($this->session->data['order_id'])) {
+			$this->load->model('checkout/order');
+			$order_data = [
+				// Здесь добавьте данные о заказе
+				'total' => $this->cart->getTotal(),
+				'currency_code' => $this->session->data['currency'],
+				'payment_method' => 'StripeCustom', // или другая оплата
+			];
+
+			$this->session->data['order_id'] = $this->model_checkout_order->addOrder($order_data);
+			$this->log->write('Order ID created: ' . $this->session->data['order_id']);
+		}
+
 		// Validate cart has products and has stock.
 		if ((!$this->cart->hasProducts() && empty($this->session->data['vouchers'])) || (!$this->cart->hasStock() && !$this->config->get('config_stock_checkout'))) {
 			$this->response->redirect($this->url->link('checkout/cart', 'language=' . $this->config->get('config_language')));
