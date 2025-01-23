@@ -131,6 +131,15 @@ $(document).on('submit', '#form-shipping-method', function(e) {
                     $('#input-payment-method').val('');
 
                     $('#checkout-confirm').load('index.php?route=checkout/confirm.confirm&language={{ language }}');
+
+                    // Обновляем содержимое корзины в header-cart-container
+                    $('#header-cart-container').load('index.php?route=common/cart.info', function(response, status, xhr) {
+                      if (status === 'success') {
+                          console.log('Cart container updated successfully.');
+                      } else {
+                          console.error('Error updating cart container:', status);
+                      }
+                  });
                 }
             },
             error: function(xhr, ajaxOptions, thrownError) {
