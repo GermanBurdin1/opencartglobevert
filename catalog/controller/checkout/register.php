@@ -169,7 +169,6 @@ class Register extends \Opencart\System\Engine\Controller {
 	 */
 	public function save(): void {
 		$this->load->language('checkout/register');
-
 		$json = [];
 
 		$keys = [
@@ -425,9 +424,8 @@ class Register extends \Opencart\System\Engine\Controller {
 			];
 
 			// Register
-			if ($this->request->post['account']) {
-				$customer_data['customer_id'] = $this->model_account_customer->addCustomer($this->request->post);
-			}
+			$this->log->write('Calling addCustomer with data: ' . json_encode($this->request->post));
+			$customer_data['customer_id'] = $this->model_account_customer->addCustomer($this->request->post);
 
 			// Logged so edit customer details
 			if ($this->customer->isLogged()) {
@@ -571,6 +569,7 @@ class Register extends \Opencart\System\Engine\Controller {
 						'address_format' => $address_format,
 						'custom_field'   => isset($this->request->post['shipping_custom_field']) ? $this->request->post['shipping_custom_field'] : []
 					];
+					$this->log->write('АДРЕС ДОСТАВКИ: ' . json_encode($shipping_address_data));
 
 					// Add
 					if ($this->request->post['account']) {
