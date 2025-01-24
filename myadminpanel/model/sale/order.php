@@ -160,7 +160,22 @@ class Order extends \Opencart\System\Engine\Model {
 	 * @return array
 	 */
 	public function getOrders(array $data = []): array {
-		$sql = "SELECT o.`order_id`, CONCAT(o.`firstname`, ' ', o.`lastname`) AS customer, (SELECT os.`name` FROM `" . DB_PREFIX . "order_status` os WHERE os.`order_status_id` = o.`order_status_id` AND os.`language_id` = '" . (int)$this->config->get('config_language_id') . "') AS order_status, o.`store_name`, o.`shipping_method`, o.`total`, o.`currency_code`, o.`currency_value`, o.`date_added`, o.`date_modified` FROM `" . DB_PREFIX . "order` o";
+		$sql = "SELECT
+					o.`order_id`,
+					CONCAT(o.`firstname`, ' ', o.`lastname`) AS customer,
+					(SELECT os.`name`
+					 FROM `" . DB_PREFIX . "order_status` os
+					 WHERE os.`order_status_id` = o.`order_status_id`
+					 AND os.`language_id` = '" . (int)$this->config->get('config_language_id') . "') AS order_status,
+					o.`store_name`,
+					o.`shipping_method`,
+					o.`total`,
+					o.`currency_code`,
+					o.`currency_value`,
+					o.`date_added`,
+					o.`date_modified`,
+					o.`shipping_address_1` AS shipping_address
+				FROM `" . DB_PREFIX . "order` o";
 
 		if (!empty($data['filter_order_status'])) {
 			$implode = [];
@@ -201,11 +216,11 @@ class Order extends \Opencart\System\Engine\Model {
 		}
 
 		if (!empty($data['filter_date_from'])) {
-			$sql .= " AND DATE(o.`date_added`) >= DATE('" . $this->db->escape((string)$data['filter_date_from']) . "')";
+			$sql .= " AND DATE(o.`date_added`) >= DATE('" . $this->db->escape((string)$data['filter_date_from'] . "')");
 		}
 
 		if (!empty($data['filter_date_to'])) {
-			$sql .= " AND DATE(o.`date_added`) <= DATE('" . $this->db->escape((string)$data['filter_date_to']) . "')";
+			$sql .= " AND DATE(o.`date_added`) <= DATE('" . $this->db->escape((string)$data['filter_date_to'] . "')");
 		}
 
 		if (!empty($data['filter_total'])) {
@@ -250,6 +265,8 @@ class Order extends \Opencart\System\Engine\Model {
 
 		return $query->rows;
 	}
+
+
 
 	/**
 	 * @param int $subscription_id

@@ -349,6 +349,7 @@ class Order extends \Opencart\System\Engine\Controller {
 				'date_added'      => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
 				'date_modified'   => date($this->language->get('date_format_short'), strtotime($result['date_modified'])),
 				'shipping_method' => $result['shipping_method'],
+				'shipping_address' => $result['shipping_address_1'],
 				'view'            => $this->url->link('sale/order.info', 'user_token=' . $this->session->data['user_token'] . '&order_id=' . $result['order_id'] . $url)
 			];
 		}

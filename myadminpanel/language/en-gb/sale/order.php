@@ -80,6 +80,8 @@ $_['column_location']            = 'Location';
 $_['column_reference']           = 'Reference';
 $_['column_weight']              = 'Product Weight';
 $_['column_action']              = 'Action';
+$_['column_payment_address'] 	 = 'Payment Address';
+
 
 // Entry
 $_['entry_store']                = 'Store';
