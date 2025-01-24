@@ -492,11 +492,12 @@ class Register extends \Opencart\System\Engine\Controller {
 				];
 
 				// Add
-				if ($this->request->post['account']) {
-					$payment_address_data['default'] = 1;
 
-					$payment_address_data['address_id'] = $this->model_account_address->addAddress($customer_data['customer_id'], $payment_address_data);
-				}
+				$payment_address_data['default'] = 1;
+				$this->log->write('Payment address data: ' . json_encode($payment_address_data));
+				$this->log->write('Calling addAddress for payment');
+				$payment_address_data['address_id'] = $this->model_account_address->addAddress($customer_data['customer_id'], $payment_address_data);
+
 
 				// Edit
 				if ($this->customer->isLogged() && $payment_address_data['address_id']) {
@@ -510,8 +511,10 @@ class Register extends \Opencart\System\Engine\Controller {
 			}
 
 			// Shipping Address
-			if ($this->cart->hasShipping()) {
-				if (!$this->request->post['address_match']) {
+			// if ($this->cart->hasShipping()) {
+				$this->log->write('Shipping address POST data: ' . json_encode($this->request->post));
+
+				// if (!$this->request->post['address_match']) {
 					if (isset($this->session->data['shipping_address']['address_id'])) {
 						$address_id = $this->session->data['shipping_address']['address_id'];
 					} else {
@@ -572,13 +575,13 @@ class Register extends \Opencart\System\Engine\Controller {
 					$this->log->write('АДРЕС ДОСТАВКИ: ' . json_encode($shipping_address_data));
 
 					// Add
-					if ($this->request->post['account']) {
+					// if ($this->request->post['account']) {
 						if (!$this->config->get('config_checkout_payment_address')) {
 							$shipping_address_data['default'] = 1;
 						}
 
 						$shipping_address_data['address_id'] = $this->model_account_address->addAddress($customer_data['customer_id'], $shipping_address_data);
-					}
+					// }
 
 					// Edit
 					if ($this->customer->isLogged() && $shipping_address_data['address_id']) {
@@ -589,13 +592,13 @@ class Register extends \Opencart\System\Engine\Controller {
 					if (!$customer_group_info['approval']) {
 						$this->session->data['shipping_address'] = $shipping_address_data;
 					}
-				} elseif (!$customer_group_info['approval'] && $this->config->get('config_checkout_payment_address')) {
-					$this->session->data['shipping_address'] = $this->session->data['payment_address'];
+				// } elseif (!$customer_group_info['approval'] && $this->config->get('config_checkout_payment_address')) {
+				// 	$this->session->data['shipping_address'] = $this->session->data['payment_address'];
 
-					// Remove the address id so if the customer changes their mind and requires changing a different shipping address it will create a new address.
-					$this->session->data['shipping_address']['address_id'] = 0;
-				}
-			}
+				// 	// Remove the address id so if the customer changes their mind and requires changing a different shipping address it will create a new address.
+				// 	$this->session->data['shipping_address']['address_id'] = 0;
+				// }
+			// }
 
 			// If everything good login
 			if (!$customer_group_info['approval']) {
